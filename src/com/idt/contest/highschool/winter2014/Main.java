@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 			
 		Mode mode;
-		
+		//test
 		// set up mode depending on command line argument
 		if (args != null && args.length > 0) {
 			// a file to process has been supplied, start the application in batch mode
