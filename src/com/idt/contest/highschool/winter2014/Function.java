@@ -1,3 +1,3 @@
 public interface Function<A>{
-	boolean test(A a);
+	public boolean test(A a);
 }
