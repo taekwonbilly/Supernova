@@ -52,4 +52,13 @@ public class BuiltinTester {
 	public static <A> void assertEquals(A a1, A a2){
 		assertEquals(a1, a2, "DefaultErrorMessage");
 	}
+
+	public static <A,B> Expectation<B> expect(A a, Function<A> init, Function<B> check){
+		boolean isValid = init.test(a);
+		return new Expectation<B>(isValid, check);
+	}
+
+	public static <A,B> Expectation<B> expectEquals(A a1, A a2, B b){
+		return expect(a1, new Equals<A>(a2), new Equals<B>(b));
+	}
 }

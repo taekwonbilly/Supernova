@@ -2,7 +2,7 @@ public class Expectation<A> {
 	boolean initCondition;
 	Function<A> finalCondition;
 
-	public Expectation(boolean init, Function<a> fin){
+	public Expectation(boolean init, Function<A> fin){
 		this.initCondition = init;
 		this.finalCondition = fin;
 	}
