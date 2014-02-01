@@ -13,7 +13,7 @@ clean:
 main: framework
 	mkdir -p ./bin/com/idt/contest/highschool/winter2014
 	cd ./src;\
-	javac com/idt/contest/highschool/winter2014/Main.java -d ../bin
+	javac com/idt/contest/highschool/winter2014/*.java -d ../bin
 
 framework:
 	mkdir -p ./bin/com/idt/contest/highschool/winter2014/framework
@@ -23,3 +23,11 @@ framework:
 run: all
 	cd ./bin; \
 	java com.idt.contest.highschool.winter2014.Main
+
+run2: all
+	cd ./bin; \
+	java com.idt.contest.highschool.winter2014.Main ~/git/Supernova/batchscript.txt
+
+runLogger: all
+	cd ./bin; \
+	java com.idt.contest.highschool.winter2014.Logger
