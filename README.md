@@ -8,7 +8,7 @@ TJHSST 1 (Billy Moses, Abi Gopal)
 ## A Very Brief Tutorial
 One of the largest sources of loss of productivity for developers is tracking down small bugs that occur during coding. Fortunately, Supernova makes it easy for developers to add robust error checking quickly and easily to their code. In this tutorial, we'll cover the very basics of what Supernova can do.
 
-### Adding Test Cases and using Expectations
+### Adding Test Cases and Using Expectations
 Consider the following code to count vowels in code:
 <pre><code>
 	public int countVowels(String word) {
