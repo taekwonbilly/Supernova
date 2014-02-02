@@ -1,7 +1,8 @@
 package com.idt.contest.highschool.winter2014.codetotest;
 
 import com.idt.contest.highschool.winter2014.framework.FrameworkConstants;
-
+import com.idt.contest.highschool.winter2014.*;
+//import static com.idt.contest.highschool.winter2014.BuiltinTester;
 /**
  * Class containing byte related utility methods
  */
@@ -15,6 +16,9 @@ public class ByteUtility {
 	 */
 	public String byteToBinytaryString(byte b) {
 		
+		Expectation<String> zeroCase = BuiltinTester.expectEquals(b,(byte)0, "0");
+		//there is a corresponding verify method by every return (although only needed where b could be 0)
+
 		byte remainder = 0;
 		byte number = b;
 		String binaryRepresentation = "";
@@ -36,7 +40,7 @@ public class ByteUtility {
 			//
 			//
 			//
-			return FrameworkConstants.ONE_STRING;
+			return zeroCase.verify(FrameworkConstants.ONE_STRING);
 		}
 		
 		// number is greater than zero 
@@ -60,7 +64,7 @@ public class ByteUtility {
 			binaryRepresentation = su.binaryByteTwosCompliment(binaryRepresentation);
 		}
 		
-		return binaryRepresentation;
+		return zeroCase.verify(binaryRepresentation);
 	}
 	
 	
