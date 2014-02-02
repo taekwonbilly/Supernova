@@ -11,7 +11,7 @@ public class Builder {
 	 * @param An array of integers.
 	 * @return Function to test if an array is in order.
 	 */
-	public static Function inOrder(int[] a){
+	tupublic static Function inOrder(int[] a){
 		return new Function<int[]>(){
 			public boolean test(int[] t){
 				if(t.length > 1)
@@ -45,9 +45,9 @@ public class Builder {
 	 * @param An array of Comparables.
 	 * @return Function to test if an array is in order.
 	 */
-	public static Function<Comparable<Object>[]> inOrder(Comparable<Object>[] a){
-		return new Function<Comparable<Object>[]>(){
-			public boolean test(Comparable<Object>[] t){
+	public static <T extends Comparable> Function<T[]> inOrder(T[] a){
+		return new Function<T[]>(){
+			public boolean test(T[] t){
 				if(t.length > 1)
 					for(int i = 0; i < t.length - 1; i++)
 						if(t[i].compareTo(t[i+1]) < 0)
@@ -86,10 +86,10 @@ public class Builder {
 	 * @param t An object to be compared to.
 	 * @return Function to test if an Object is equal to t.
 	 */
-	public static Function<Comparable<Object>> equals(Comparable<Object> t){
-		final Comparable<Object> b = t;
-		return new Function<Comparable<Object>>(){
-			public boolean test(Comparable<Object> a){
+	public static <T> Function<T> equals(T t){
+		final T b = t;
+		return new Function<T>(){
+			public boolean test(T a){
 				return a.equals(b);
 			}
 		};
@@ -100,10 +100,10 @@ public class Builder {
 	 * @param t An object to be compared to.
 	 * @return Function to test if an Object is strictly to t.
 	 */
-	public static Function<Comparable<Object>> isGreater(Comparable<Object> t){
-		final Comparable<Object> b = t;
-		return new Function<Comparable<Object>>(){
-			public boolean test(Comparable<Object> a){
+	public static <T extends Comparable> Function<T> isGreater(T t){
+		final T b = t;
+		return new Function<T>(){
+			public boolean test(T a){
 				return (a.compareTo(b) > 0); // Strictly greater
 			}
 		};
