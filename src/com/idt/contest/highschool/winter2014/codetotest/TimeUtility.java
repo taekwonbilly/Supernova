@@ -2,6 +2,7 @@ package com.idt.contest.highschool.winter2014.codetotest;
 
 import com.idt.contest.highschool.winter2014.framework.FrameworkConstants;
 
+import com.idt.contest.highschool.winter2014.*;
 /**
  * Class containing time related utility methods 
  */
@@ -105,6 +106,7 @@ public class TimeUtility {
 				//
 				//
 				total_days = day + calendar[2];
+				BuiltinTester.assertEquals(total_days, 31, "Doh! Adding the wrong month!");
 			}
 			else
 			{
