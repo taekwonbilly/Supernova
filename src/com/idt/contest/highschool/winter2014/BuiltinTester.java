@@ -22,7 +22,7 @@ public class BuiltinTester {
 	 * 
 	 */
 	public static <A> void customAssert(A a, Function<A> f, String errorMessage){
-		Logger.log(getStackInformation(), errorMessage, f.test(a));
+		Logger.log(getStackInformation(), errorMessage, ! f.test(a));
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class BuiltinTester {
 	 *
 	 */ 
 	public static <A> void customAssert(A a, Function<A> f){
-		Logger.log(getStackInformation(), "Custom Assertion of "+a.toString(), f.test(a));
+		Logger.log(getStackInformation(), "Custom Assertion of "+a.toString(), ! f.test(a));
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class BuiltinTester {
 	 * @param errorMessage Custom error message string in case the test fails. 
 	 */
 	public static <A,B> void dualAssert(A a, B b, Function<A> f1, Function<B> f2, String errorMessage){
-		Logger.log(getStackInformation(), errorMessage, f1.test(a) && f2.test(b));
+		Logger.log(getStackInformation(), errorMessage, !f1.test(a) || !f2.test(b));
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class BuiltinTester {
 	 * @param f2 An object that implements the Function<A> interface. b is tested with this object's test method.
 	 */
 	public static <A,B> void dualAssert(A a, B b, Function<A> f1, Function<B> f2){
-		Logger.log(getStackInformation(), "Custom Dual Assertion of "+a.toString()+" and "+b.toString(), f1.test(a) && f2.test(b));
+		Logger.log(getStackInformation(), "Custom Dual Assertion of "+a.toString()+" and "+b.toString(), !f1.test(a) || !f2.test(b));
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class BuiltinTester {
 	 * @param errorMessage Custom error message string in case the test fails
 	 */
 	public static <A,B> void dualAssert(A a, B b, BinaryFunction<A,B> bf, String errorMessage){
-		Logger.log(getStackInformation(), errorMessage, bf.test(a,b));
+		Logger.log(getStackInformation(), errorMessage, !bf.test(a,b));
 	}	
 
 	/**
@@ -77,7 +77,7 @@ public class BuiltinTester {
 	 * @param bf An object that implements the Function<A> interface. Both a and b are tested with this object's test method.
 	 */
 	public static <A,B> void dualAssert(A a, B b, BinaryFunction<A,B> bf){
-		Logger.log(getStackInformation(), "Custom Dual Assertion of "+a.toString()+" and "+b.toString(), bf.test(a,b));
+		Logger.log(getStackInformation(), "Custom Dual Assertion of "+a.toString()+" and "+b.toString(), !bf.test(a,b));
 		return;
 	}
 
@@ -88,7 +88,7 @@ public class BuiltinTester {
 	 * @param errorMessage Custom error message string in case the test fails.
 	 */
 	public static <A> void assertEquals(A a1, A a2, String errorMessage){
-		Logger.log(getStackInformation(), errorMessage, a1.equals(a2));
+		Logger.log(getStackInformation(), errorMessage, !a1.equals(a2));
 		return;
 	}
 
@@ -98,7 +98,7 @@ public class BuiltinTester {
 	 * @param a2 Another object that should equal a1.
 	 */
 	public static <A> void assertEquals(A a1, A a2){
-		Logger.log(getStackInformation(), "Asserted Equality Between "+a1.toString()+" and "+a2.toString(), a1.equals(a2));
+		Logger.log(getStackInformation(), "Asserted Equality Between "+a1.toString()+" and "+a2.toString(), !a1.equals(a2));
 		return;
 	}
 

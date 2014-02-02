@@ -39,6 +39,7 @@ public class ByteUtility {
 		if (b == 0) {
 			//assume b==0, which it should
 			BuiltinTester.customAssert(b, Builder.doesEqual((byte)0));
+			BuiltinTester.assertEquals(b, (byte)0);
 			//
 			//
 			//
