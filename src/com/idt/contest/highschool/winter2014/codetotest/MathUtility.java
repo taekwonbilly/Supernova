@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.idt.contest.highschool.winter2014.framework.FrameworkConstants;
+import com.idt.contest.highschool.winter2014.*;
 
 /**
  * Class containing math related utility methods 
@@ -20,6 +21,11 @@ public class MathUtility {
 		
 		// divide the number by 2 and no remainder exists, the number is even
 		if (numToCheck % 2 == 0) {
+			BuiltinTester.customAssert(numToCheck, new Function<Integer>(){
+				public boolean test(Integer a){
+					return (a&1)==0;
+				}
+			});
 			return true;
 		} else {
 			return false;
@@ -47,8 +53,19 @@ public class MathUtility {
 	 * @return - array of ints that represent the prime factors
 	 */
 	public int[] primeFactor(int number) {
-
+		BuiltinTester.customAssert(number, Builder.isGreater(0));
 		List<Integer> factors = new ArrayList<Integer>();
+
+		/** Make sure multiplying the numbers together gives the original number
+		*/
+		final int fin=number;
+		Expectation<int[]> factorCheck = BuiltinTester.expect(number, Builder.isGreater(1), new Function<int[]>(){
+			public boolean test(int[] s){
+				int tmp=1;
+				for(int i: s) tmp*=i;
+				return tmp==fin;
+			}
+		});
 		int divider = 2;
 		
 		// determine the prime factors of the given number
@@ -72,7 +89,7 @@ public class MathUtility {
 		}
 		
 		// return int array of prime factors
-		return returnArray;
+		return factorCheck.verify(returnArray);
 	}
 	
 	
