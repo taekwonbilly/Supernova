@@ -18,7 +18,7 @@ public class ByteUtility {
 		
 		Expectation<String> zeroCase = BuiltinTester.expectEquals(b,(byte)0, "0");
 		final byte fin=b;
-		Expectation<String> greaterThanZero = BuiltinTester.expect(b, Builder.isGreater(b), new Function<String>(){
+		Expectation<String> greaterThanZero = BuiltinTester.expect(b, Builder.isGreater((byte)0), new Function<String>(){
 			public boolean test(String s){
 				return Byte.parseByte(s,2)==fin;
 			}

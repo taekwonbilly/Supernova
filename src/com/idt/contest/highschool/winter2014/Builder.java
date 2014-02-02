@@ -11,7 +11,7 @@ public class Builder {
 	 * @param An array of integers.
 	 * @return Function to test if an array is in order.
 	 */
-	tupublic static Function inOrder(int[] a){
+	public static Function inOrder(int[] a){
 		return new Function<int[]>(){
 			public boolean test(int[] t){
 				if(t.length > 1)
@@ -86,7 +86,7 @@ public class Builder {
 	 * @param t An object to be compared to.
 	 * @return Function to test if an Object is equal to t.
 	 */
-	public static <T> Function<T> equals(T t){
+	public static <T> Function<T> doesEqual(T t){
 		final T b = t;
 		return new Function<T>(){
 			public boolean test(T a){
