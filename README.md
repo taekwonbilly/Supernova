@@ -32,7 +32,7 @@ By simply adding one line and modifying another, Supernova will immediately log 
 
 Expectations can be used for more than just testing equality. The BuiltinTester,includes a generic "expects" function, which can be passed in a Function, which could then be used to create more test cases. For example, I could have pass "expects" an argument that ensures that for a particular input, my code will return true for a particular function. I could also pass "expects" two Functions, which would make sure that for any input that passes the first Function, the second Function must also be true. This allows for robust inputs for test cases.
 
-## Assertions
+### Assertions
 Sometimes, we want to ensure that a particular variable meets some kind of rule, at an instance in the code. In essence, we want to "assert" that something is true. Java 7 provides basic assertions to ensure equality, but Supernova takes this one step further. Consider:
 <pre><code>
 	public void doSomething(int a){
@@ -58,10 +58,10 @@ Voila! Now, if something happens to transform, and transform stops yielding even
 
 In addition to the above example, Supernova supports multiple types of custom assertions, including binary assertions. Supernova also includes a handy Builder class which comes with several Functions that can be used right from the get go.
 
-## Disabling Supernova
+### Disabling Supernova
 If you have very time/space complex testing code, it may be a good idea to disable Supernova before putting your program into production. This can easily be done by using Logger.disable().
 
-## Running Supernova
+### Running Supernova
 Use the "make" command to compile files.
 "make run" will run it in interactive file.
 "make run2" will use the batchscript.txt.
