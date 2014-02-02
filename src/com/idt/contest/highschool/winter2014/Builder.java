@@ -108,4 +108,46 @@ public class Builder {
 			}
 		};
 	}
+
+	/**
+	 * Returns a Function to test if an Object is strictly less than another object.
+	 * @param t An object to be compared to.
+	 * @return Function to test if an Object is strictly to t.
+	 */
+	public static <T extends Comparable> Function<T> isLess(T t){
+		final T b = t;
+		return new Function<T>(){
+			public boolean test(T a){
+				return (a.compareTo(b) < 0); // Strictly less
+			}
+		};
+	}
+
+	/**
+	 * Returns a Function to test if an Object is greater than or equal to another object.
+	 * @param t An object to be compared to.
+	 * @return Function to test if an Object is strictly to t.
+	 */
+	public static <T extends Comparable> Function<T> isGreaterOrEqual(T t){
+		final T b = t;
+		return new Function<T>(){
+			public boolean test(T a){
+				return (a.compareTo(b) >= 0); // greater
+			}
+		};
+	}
+
+	/**
+	 * Returns a Function to test if an Object is less than or equal to another object.
+	 * @param t An object to be compared to.
+	 * @return Function to test if an Object is strictly to t.
+	 */
+	public static <T extends Comparable> Function<T> isLessOrEqual(T t){
+		final T b = t;
+		return new Function<T>(){
+			public boolean test(T a){
+				return (a.compareTo(b) <= 0); // less
+			}
+		};
+	}
 }

@@ -23,6 +23,12 @@ public class ByteUtility {
 				return Byte.parseByte(s,2)==fin;
 			}
 		});
+		Expectation<String> lessThanZero = BuiltinTester.expect(b, Builder.isLess((byte)0), new Function<String>(){
+			public boolean test(String s){
+				return Byte.parseByte(s,2)==255-fin;
+			}
+		});
+
 		//there is a corresponding verify method by every return (although only needed where b could be 0)
 
 		byte remainder = 0;
@@ -31,6 +37,8 @@ public class ByteUtility {
 		
 		// handle the case of zero 
 		if (b == 0) {
+			//assume b==0, which it should
+			BuiltinTester.customAssert(b, Builder.doesEqual((byte)0));
 			//
 			//
 			//
@@ -46,7 +54,7 @@ public class ByteUtility {
 			//
 			//
 			//
-			return greaterThanZero.verify(zeroCase.verify(FrameworkConstants.ONE_STRING));
+			return lessThanZero.verify(greaterThanZero.verify(zeroCase.verify(FrameworkConstants.ONE_STRING)));
 		}
 		
 		// number is greater than zero 
@@ -70,7 +78,7 @@ public class ByteUtility {
 			binaryRepresentation = su.binaryByteTwosCompliment(binaryRepresentation);
 		}
 		
-		return greaterThanZero.verify(zeroCase.verify(binaryRepresentation));
+		return lessThanZero.verify(greaterThanZero.verify(zeroCase.verify(binaryRepresentation)));
 	}
 	
 	
