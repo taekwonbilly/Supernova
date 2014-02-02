@@ -7,40 +7,6 @@ import com.idt.contest.highschool.winter2014.Function;
 public class Builder {
 
 	/**
-	 * Returns a Function to test if an array of integers is in order.
-	 * @param An array of integers.
-	 * @return Function to test if an array is in order.
-	 */
-	public static Function inOrder(int[] a){
-		return new Function<int[]>(){
-			public boolean test(int[] t){
-				if(t.length > 1)
-					for(int i = 0; i < t.length - 1; i++)
-						if(t[i] > t[i+1])
-							return false;
-				return true;
-			}
-		};
-	}
-	
-	/**
-	 * Returns a Function to test if an array of doubles is in order.
-	 * @param An array of doubles.
-	 * @return Function to test if an array is in order.
-	 */
-	public static Function inOrder(double[] a){
-		return new Function<double[]>(){
-			public boolean test(double[] t){
-				if(t.length > 1)
-					for(int i = 0; i < t.length - 1; i++)
-						if(t[i] > t[i+1])
-							return false;
-				return true;
-			}
-		};
-	}
-	
-	/**
 	 * Returns a Function to test if an array of Comparables is in order.
 	 * @param An array of Comparables.
 	 * @return Function to test if an array is in order.
