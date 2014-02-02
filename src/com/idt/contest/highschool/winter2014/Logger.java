@@ -1,5 +1,7 @@
 package com.idt.contest.highschool.winter2014;
 
+import com.idt.contest.highschool.winter2014.Expectation;
+
 import java.io.PrintWriter;
 import java.io.File;
 import java.util.*;
@@ -90,10 +92,10 @@ public class Logger {
 			StackTraceElement[] stack = Thread.currentThread().getStackTrace();
 			location = stack[stack.length-1];
 		}
-		String fileName = last.getFileName();
-		String className = last.getClassName();
-		int lineNumber = last.getLineNumber();
-		String methodName = last.getMethodName();
+		String fileName = location.getFileName();
+		String className = location.getClassName();
+		int lineNumber = location.getLineNumber();
+		String methodName = location.getMethodName();
 		SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy hh:mm:ssa");
 		/** Get current time, as formatted above*/
     	String time = sdfDate.format(new Date());

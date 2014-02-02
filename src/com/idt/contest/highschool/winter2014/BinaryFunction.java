@@ -1,3 +1,4 @@
+package com.idt.contest.highschool.winter2014;
 /**
  * Can be used instead of Function to pass two objects to the same testing function. See the Builder class for some predefined BinaryFunctions.
  */

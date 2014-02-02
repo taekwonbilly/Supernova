@@ -1,8 +1,16 @@
+package com.idt.contest.highschool.winter2014;
+import com.idt.contest.highschool.winter2014.Logger;
 /**
  * Class that does handles testing. Contains assertions, as well as a way of interfacing with Expectations The following generic methods handles all of the primative types, as in the recent versions of Java the primative types are autoboxed to their wrapper classes (e.g. int to Integer). 
  */
 public class BuiltinTester {
-				
+	/**
+	*	Helper method that gets the file name, method name and more of the function which called the function which called this helper method
+	*/
+	private static StackTraceElement getStackInformation(){
+		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+		return stack[stack.length-2];
+	}
 	/**
 	 * Checks if an object passes a particular function. If the function returns true, log that it passed. If not, logged that it failed with a custom error message.
 	 *
@@ -12,14 +20,7 @@ public class BuiltinTester {
 	 * 
 	 */
 	public static <A> void customAssert(A a, Function<A> f, String errorMessage){
-		if(f.test(a)){
-			// log the correct stuff
-			return;
-		}
-		else {
-			// log the incorrect stuff
-			return;
-		}
+		Logger.log(getStackInformation(), errorMessage, f.test(a));
 	}
 	
 	/**
@@ -30,7 +31,7 @@ public class BuiltinTester {
 	 *
 	 */ 
 	public static <A> void customAssert(A a, Function<A> f){
-		customAssert(a, f, "DefaultErrorMessage");
+		Logger.log(getStackInformation(), "Custom Assertion of "+a.toString(), f.test(a));
 	}
 
 	/**
@@ -42,14 +43,7 @@ public class BuiltinTester {
 	 * @param errorMessage Custom error message string in case the test fails. 
 	 */
 	public static <A,B> void dualAssert(A a, B b, Function<A> f1, Function<B> f2, String errorMessage){
-		if(f1.test(a) && f2.test(b)){
-			// log the correct stuff
-			return;
-		}
-		else {
-			// log the incorrect stuff
-			return;
-		}
+		Logger.log(getStackInformation(), errorMessage, f1.test(a) && f2.test(b));
 	}
 
 	/**
@@ -60,7 +54,7 @@ public class BuiltinTester {
 	 * @param f2 An object that implements the Function<A> interface. b is tested with this object's test method.
 	 */
 	public static <A,B> void dualAssert(A a, B b, Function<A> f1, Function<B> f2){
-		dualAssert(a, b, f1, f2, "DefaultErrorMessage");
+		Logger.log(getStackInformation(), "Custom Dual Assertion of "+a.toString()+" and "+b.toString(), f1.test(a) && f2.test(b));
 	}
 
 	/**
@@ -71,14 +65,7 @@ public class BuiltinTester {
 	 * @param errorMessage Custom error message string in case the test fails
 	 */
 	public static <A,B> void dualAssert(A a, B b, BinaryFunction<A,B> bf, String errorMessage){
-		if(bf.test(a, b)){
-			// log correct stuff
-			return;
-		}
-		else {
-			// log incorrect stuff
-			return;
-		}
+		Logger.log(getStackInformation(), errorMessage, bf.test(a,b));
 	}	
 
 	/**
@@ -88,7 +75,8 @@ public class BuiltinTester {
 	 * @param bf An object that implements the Function<A> interface. Both a and b are tested with this object's test method.
 	 */
 	public static <A,B> void dualAssert(A a, B b, BinaryFunction<A,B> bf){
-		dualAssert(a, b, bf, "DefaultErrorMessage");
+		Logger.log(getStackInformation(), "Custom Dual Assertion of "+a.toString()+" and "+b.toString(), bf.test(a,b));
+		return;
 	}
 
 	/**
@@ -98,7 +86,7 @@ public class BuiltinTester {
 	 * @param errorMessage Custom error message string in case the test fails.
 	 */
 	public static <A> void assertEquals(A a1, A a2, String errorMessage){
-		// do stuff (needs Builder)
+		Logger.log(getStackInformation(), errorMessage, a1.equals(a2));
 		return;
 	}
 
@@ -108,19 +96,30 @@ public class BuiltinTester {
 	 * @param a2 Another object that should equal a1.
 	 */
 	public static <A> void assertEquals(A a1, A a2){
-		assertEquals(a1, a2, "DefaultErrorMessage");
+		Logger.log(getStackInformation(), "Asserted Equality Between "+a1.toString()+" and "+a2.toString(), a1.equals(a2));
+		return;
 	}
 
 	/**
-	 * Creates an Expectation<B> that expects the result of init acting on a, with a testing function of check.
+	 * Creates an Expectation<B> that expects that the argument of its verify method satisdies check if a satisfies init.
+	 * If a does not satisfy init, the check does not occur.
 	 * @param a Any object that needs to be tested.
 	 * @param init An object that implements the Function<A> interface. The expectation is passed the value of init acting upon a.
 	 * @param check The testing function passed to the Expectation that is returned.
 	 * @return Returns an Expectation that expects the value of init acting upon a with the testing function check.
 	 */
 	public static <A,B> Expectation<B> expect(A a, Function<A> init, Function<B> check){
-		boolean isValid = init.test(a);
-		return new Expectation<B>(isValid, check);
+		return new Expectation<B>(getStackInformation(), init.test(a), check);
+	}
+	/**
+	 * Creates an Expectation<B> that expects that the argument of its verify method will be satisfy check.
+	 * If a1 and a2 are not equal, the check does not occur.
+	 * @param a1 Any object that needs to be tested.
+	 * @param a2 Another object that needs to be tested.
+	 * @param check An object whose equality will be expected by the expectation.
+	 */
+	public static <A,B> Expectation<B> expect(Function<B> check){
+		return new Expectation<B>(getStackInformation(), true, check);
 	}
 
 	/**
@@ -128,8 +127,8 @@ public class BuiltinTester {
 	 * @param a1 Any object that needs to be tested.
 	 * @param a2 Another object that needs to be tested.
 	 * @param b An object whose equality will be expected by the expectation.
-	 * /
+	 */
 	public static <A,B> Expectation<B> expectEquals(A a1, A a2, B b){
-		return expect(a1, new Equals<A>(a2), new Equals<B>(b));
+		return new Expectation<B>(getStackInformation(), a1.equals(a2), new Equals<B>(b));
 	}
 }
