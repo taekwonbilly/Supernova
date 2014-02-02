@@ -1,7 +1,7 @@
 package com.idt.contest.highschool.winter2014.codetotest;
 
 import com.idt.contest.highschool.winter2014.framework.FrameworkConstants;
-
+import com.idt.contest.highschool.winter2014.*;
 /**
  * Class containing String related utility methods
  */
@@ -14,7 +14,7 @@ public class StringUtility {
 	 * @return - int number of vowels in supplied String
 	 */
 	public int countVowels(String stringToCheck) {
-		
+		Expectation<Integer> vowelArrayRight = BuiltinTester.expectEquals(stringToCheck,"aeiouAEIOU",10);			
 		int vowelCount = 0;
 		char currentChar;
 		//
@@ -50,7 +50,7 @@ public class StringUtility {
 			}
 		}
 		
-		return vowelCount;
+		return vowelArrayRight.verify(vowelCount);
 	}
 	
 	
