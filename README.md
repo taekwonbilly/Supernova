@@ -28,9 +28,9 @@ In this example, the capital 'O' is replaced by a '0'. This error might be small
 		return e.verify(vowelCount);
 	}
 </code></pre>
-By simply adding one line and modifying another, Supernova will immediately log the file name, method name, and line number of the offending bit of code, when this method is ran with <pre><code>word = "aeiouAEIOU"</code>.</pre>, If the method is fed in "aeiouAEIOU" and <pre><code>vowelCount</code> </pre>,isn't 10, then the logger will log an error. If everything is good, and vowelCount is 10 at the time of return, then the logger will indicate that the program successfully made it through that one test case.  A developer could quickly write a list of possible test cases, automate his or her program to run through them, and just check Supernova's log to see if there are any issues. By considering simple cases and edge cases from the start, Supernova allows developers to avoid using ad hoc approaches to error checking.
+By simply adding one line and modifying another, Supernova will immediately log the file name, method name, and line number of the offending bit of code, when this method is ran with word = "aeiouAEIOU", If the method is fed in "aeiouAEIOU" and vowelCount,isn't 10, then the logger will log an error. If everything is good, and vowelCount is 10 at the time of return, then the logger will indicate that the program successfully made it through that one test case.  A developer could quickly write a list of possible test cases, automate his or her program to run through them, and just check Supernova's log to see if there are any issues. By considering simple cases and edge cases from the start, Supernova allows developers to avoid using ad hoc approaches to error checking.
 
-Expectations can be used for more than just testing equality. The <pre><code>BuiltinTester</code> </pre>,includes a generic "expects" function, which can be passed in a <pre><code>Function</code></pre>, which could then be used to create more test cases. For example, I could have pass "expects" an argument that ensures that for a particular input, my code will return true for a particular function. I could also pass "expects" two <pre><code>Functions</code></pre>, which would make sure that for any input that passes the first Function, the second Function must also be true. This allows for robust inputs for test cases.
+Expectations can be used for more than just testing equality. The BuiltinTester,includes a generic "expects" function, which can be passed in a Function, which could then be used to create more test cases. For example, I could have pass "expects" an argument that ensures that for a particular input, my code will return true for a particular function. I could also pass "expects" two Functions, which would make sure that for any input that passes the first Function, the second Function must also be true. This allows for robust inputs for test cases.
 
 ## Assertions
 Sometimes, we want to ensure that a particular variable meets some kind of rule, at an instance in the code. In essence, we want to "assert" that something is true. Java 7 provides basic assertions to ensure equality, but Supernova takes this one step further. Consider:
@@ -56,7 +56,12 @@ These cases are fairly common, and it's clear that Java's regular assertion isn'
 </code></pre>
 Voila! Now, if something happens to transform, and transform stops yielding even numbers, Supernova's logger will instantly show that this assertion failed, immediately showing the developer that there is an issue with transform. 
 
-In addition to the above example, Supernova supports multiple types of custom assertions, including binary assertions. Supernova also includes a handy <pre><code>Builder</code></pre> class which comes with several Functions that can be used right from the get go.
+In addition to the above example, Supernova supports multiple types of custom assertions, including binary assertions. Supernova also includes a handy Builder class which comes with several Functions that can be used right from the get go.
 
 ## Disabling Supernova
-If you have very time/space complex testing code, it may be a good idea to disable Supernova before putting your program into production. This can easily be done by using <pre><code>Logger.disable()</code></pre>.
+If you have very time/space complex testing code, it may be a good idea to disable Supernova before putting your program into production. This can easily be done by using Logger.disable().
+
+## Running Supernova
+Use the "make" command to compile files.
+"make run" will run it in interactive file.
+"make run2" will use the batchscript.txt.
