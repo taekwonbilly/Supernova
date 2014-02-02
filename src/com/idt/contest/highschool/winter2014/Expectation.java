@@ -17,6 +17,10 @@ public class Expectation<A> {
 	 */
 	StackTraceElement creationLocation;
 	/**
+	* Error message
+	*/
+	String message;
+	/**
 	 * Constructor for Expectation objects.
 	 * @param creationLocation Part of stack where it was created for robust error logging.
 	 * @param init Boolean to determine whether or not the testing framework should be active.
@@ -26,6 +30,20 @@ public class Expectation<A> {
 		this.creationLocation = creationLocation;
 		this.initCondition = init;
 		this.finalCondition = fin;
+		this.message = null;
+	}
+
+	/**
+	 * Constructor for Expectation objects.
+	 * @param creationLocation Part of stack where it was created for robust error logging.
+	 * @param init Boolean to determine whether or not the testing framework should be active.
+	 * @param fin Function to test objects against.
+	 */
+	public Expectation(StackTraceElement creationLocation, boolean init, Function<A> fin, String mes){
+		this.creationLocation = creationLocation;
+		this.initCondition = init;
+		this.finalCondition = fin;
+		this.message = mes;
 	}
 
 	/**
@@ -37,17 +55,17 @@ public class Expectation<A> {
 		String message;
 		boolean failed;
 		if(initCondition==false){
-			message = "Test not run: Initial condition not true";
-			failed = false;
+			//Test not run, initial condition not true
+			return a;
 		} else {
 			failed = !finalCondition.test(a);
-			message = (failed)?(a.toString()+" did not meet final condition"):(a.toString()+"did meet final condition");
+			message = (failed)?(a.toString()+" did not meet final condition"):(a.toString()+" did meet final condition");
 
 			StackTraceElement[] stack = Thread.currentThread().getStackTrace();
 			StackTraceElement verification = stack[stack.length-1];
-			message+="when verified on line "+verification.getLineNumber()+" of file \""+verification.getFileName()+"\"";
+			message+=" when verified on line "+verification.getLineNumber()+" of file \""+verification.getFileName()+"\"";
 		}
-		Logger.log(creationLocation, message, failed);
+		Logger.log(creationLocation, (this.message==null)?message:(this.message), failed);
 		return a;
 	}
 }

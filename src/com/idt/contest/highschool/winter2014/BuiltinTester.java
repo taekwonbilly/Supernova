@@ -129,8 +129,44 @@ public class BuiltinTester {
 	 * @param a1 Any object that needs to be tested.
 	 * @param a2 Another object that needs to be tested.
 	 * @param b An object whose equality will be expected by the expectation.
+	 * @param message The error message to pass
 	 */
 	public static <A,B> Expectation<B> expectEquals(A a1, A a2, B b){
 		return new Expectation<B>(getStackInformation(), a1.equals(a2), new Equals<B>(b));
+	}
+
+	/**
+	 * Creates an Expectation<B> that expects that the argument of its verify method satisdies check if a satisfies init.
+	 * If a does not satisfy init, the check does not occur.
+	 * @param a Any object that needs to be tested.
+	 * @param init An object that implements the Function<A> interface. The expectation is passed the value of init acting upon a.
+	 * @param check The testing function passed to the Expectation that is returned.
+	 * @return Returns an Expectation that expects the value of init acting upon a with the testing function check.
+	 * @param message The error message to pass
+	 */
+	public static <A,B> Expectation<B> expect(A a, Function<A> init, Function<B> check, String message){
+		return new Expectation<B>(getStackInformation(), init.test(a), check,message);
+	}
+	/**
+	 * Creates an Expectation<B> that expects that the argument of its verify method will be satisfy check.
+	 * If a1 and a2 are not equal, the check does not occur.
+	 * @param a1 Any object that needs to be tested.
+	 * @param a2 Another object that needs to be tested.
+	 * @param check An object whose equality will be expected by the expectation.
+	 * @param message The error message to pass
+	 */
+	public static <A,B> Expectation<B> expect(Function<B> check, String message){
+		return new Expectation<B>(getStackInformation(), true, check, message);
+	}
+
+	/**
+	 * Creates an Expectation<B> that expects true if a1 and a2 are equal. If not, expects false. And, for the testing function checks to see if b is equal.
+	 * @param a1 Any object that needs to be tested.
+	 * @param a2 Another object that needs to be tested.
+	 * @param b An object whose equality will be expected by the expectation.
+	 * @param message The error message to pass
+	 */
+	public static <A,B> Expectation<B> expectEquals(A a1, A a2, B b, String message){
+		return new Expectation<B>(getStackInformation(), a1.equals(a2), new Equals<B>(b), message);
 	}
 }

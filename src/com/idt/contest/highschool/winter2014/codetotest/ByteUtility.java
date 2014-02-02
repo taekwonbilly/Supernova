@@ -22,12 +22,12 @@ public class ByteUtility {
 			public boolean test(String s){
 				return Byte.parseByte(s,2)==fin;
 			}
-		});
+		}, "Failed when greater than zero");
 		Expectation<String> lessThanZero = BuiltinTester.expect(b, Builder.isLess((byte)0), new Function<String>(){
 			public boolean test(String s){
 				return Byte.parseByte(s,2)==255-fin;
 			}
-		});
+		}, "Failed when less than zero");
 
 		//there is a corresponding verify method by every return (although only needed where b could be 0)
 
@@ -92,7 +92,13 @@ public class ByteUtility {
 	 * 			 	 if placesToShift is greater than 8 or negative, return 0
 	 */
 	public byte shiftByte(byte b, int placesToShift, boolean left) {
-		
+		final byte fin = b;
+		final int fin2=placesToShift;
+		Expectation<Byte> leftCheck = BuiltinTester.expect(left,Builder.doesEqual(true), new Function<Byte>(){
+			public boolean test(Byte b){
+				return b==fin<<fin2;
+			}
+		}, "Failed left shift");
 		byte shiftedByte;
 		
 		if (placesToShift > FrameworkConstants.BITS_IN_BYTE || placesToShift < 0) {
@@ -103,7 +109,7 @@ public class ByteUtility {
 			shiftedByte = (byte) (b >> placesToShift);
 		}
 		
-		return shiftedByte;
+		return leftCheck.verify(shiftedByte);
 	}
 	
 	
