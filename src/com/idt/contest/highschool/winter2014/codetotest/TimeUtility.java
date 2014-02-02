@@ -29,7 +29,7 @@ public class TimeUtility {
 		double fraction = 0.0;
 		int hours, minutes, seconds;
 		StringUtility su = new StringUtility();
-
+		
 		// handle null and zero time
 		if (HMS == null ||  HMS.equals("0.0")) {
 			return 0.0;
@@ -106,7 +106,7 @@ public class TimeUtility {
 				//
 				//
 				total_days = day + calendar[2];
-				BuiltinTester.assertEquals(total_days, 31, "Doh! Adding the wrong month!");
+				BuiltinTester.assertEquals(total_days-day, 31, "There are 31 days in January");
 			}
 			else
 			{

@@ -38,8 +38,8 @@ public class ByteUtility {
 		// handle the case of zero 
 		if (b == 0) {
 			//assume b==0, which it should
-			BuiltinTester.customAssert(b, Builder.doesEqual((byte)0));
-			BuiltinTester.assertEquals(b, (byte)0);
+			BuiltinTester.customAssert(b, Builder.doesEqual((byte)0), "if statement failed");
+			BuiltinTester.assertEquals(b, (byte)0, "if statement failed");
 			//
 			//
 			//
