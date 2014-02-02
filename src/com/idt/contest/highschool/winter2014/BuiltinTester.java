@@ -1,5 +1,7 @@
 package com.idt.contest.highschool.winter2014;
+
 import com.idt.contest.highschool.winter2014.Logger;
+import com.idt.contest.highschool.winter2014.Expectation;
 /**
  * Class that does handles testing. Contains assertions, as well as a way of interfacing with Expectations The following generic methods handles all of the primative types, as in the recent versions of Java the primative types are autoboxed to their wrapper classes (e.g. int to Integer). 
  */

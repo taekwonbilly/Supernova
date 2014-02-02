@@ -1,4 +1,6 @@
 package com.idt.contest.highschool.winter2014;
+
+import com.idt.contest.highschool.winter2014.Function;
 /** 
  * Handy prebuilt Functions ready to be used with BuiltinTester.
  */
